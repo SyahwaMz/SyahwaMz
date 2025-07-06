@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Interaktif Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+      background-color: #0f2027;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-bottom: 5rem;
+      overflow-x: hidden;
+      position: relative;
+      animation: fadePage 1.2s ease-in, bgCycle 60s ease infinite;
+    }
+    @keyframes bgCycle {
+      0% { background: radial-gradient(circle, #0f2027, #203a43, #2c5364); }
+      33% { background: radial-gradient(circle, #1e3c72, #2a5298, #1b2735); }
+      66% { background: radial-gradient(circle, #6a11cb, #2575fc, #1b1b2f); }
+      100% { background: radial-gradient(circle, #0f2027, #203a43, #2c5364); }
+    }
+    @keyframes fadePage {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png') repeat;
+      animation: moveStars 100s linear infinite;
+      z-index: 0;
+      opacity: 0.2;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 5000px; }
+    }
+    header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #00ffe1;
+      animation: neon-flicker 1.5s infinite alternate;
+    }
+    @keyframes neon-flicker {
+      from { text-shadow: 0 0 10px #00ffe1, 0 0 20px #00ffe1; }
+      to { text-shadow: 0 0 30px #00ffe1, 0 0 60px #00ffe1; }
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      z-index: 2;
+      position: relative;
+    }
+    .nav-tabs button {
+      font-family: 'Orbitron', sans-serif;
+      background: rgba(255,255,255,0.08);
+      color: #00ffe1;
+      border: 1px solid rgba(0,255,255,0.3);
+      border-radius: 30px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-tabs button:hover {
+      background: #00ffe1;
+      color: #111;
+    }
+
+    main {
+      width: 90%;
+      max-width: 900px;
+      margin-top: 2rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .section-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+    }
+    .section-box:hover {
+      transform: scale(1.04);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 30px rgba(0, 255, 255, 0.4), 0 0 30px rgba(0, 255, 255, 0.1);
+    }
+
+    .btn {
+      font-family: 'Orbitron', sans-serif;
+      background: #00ffe1;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 8px 25px rgba(0,255,225,0.6), 0 0 10px #00ffe1;
+      transition: all 0.3s ease;
+      animation: bounce 2.5s infinite;
+    }
+    .btn:hover {
+      background: #00bba3;
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,255,225,0.8), 0 0 15px #00ffe1;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    .hidden-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.15);
+      border-left: 5px solid #00ffe1;
+      border-radius: 12px;
+      display: none;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #ccc;
+      text-shadow: 0 0 4px rgba(255,255,255,0.2);
+      z-index: 1;
+    }
+
+    .type-effect {
+      display: inline-block;
+      border-right: 3px solid #00ffe1;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      font-size: 1.4rem;
+      animation: typing 4s steps(44, end) 1s forwards, blink 1s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .floating-icons {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+    .floating-icons img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+    .floating-icons img:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(10, 20, 30, 0.85);
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      z-index: 30;
+      width: 80%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 25px rgba(0,255,255,0.4), 0 0 5px rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,255,255,0.2);
+    }
+    .modal.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <header>
+    <h1>Zona Eksperimen Interaktif</h1>
+    <div class="nav-tabs">
+      <button onclick="document.getElementById('secretMessage').scrollIntoView({ behavior: 'smooth' })">Pesan Rahasia</button>
+      <button onclick="document.getElementById('quizInput').scrollIntoView({ behavior: 'smooth' })">Quiz</button>
+      <button onclick="document.querySelector('.section-box:last-of-type').scrollIntoView({ behavior: 'smooth' })">Ubah Tema</button>
+    </div>
+  </header>
+  <main>
+    <div class="section-box">
+      <h2><span class="type-effect">Welcome To The Interactive Experiment Zone!</span></h2>
+      <p>Di sini kamu bisa mencoba fitur-fitur seperti pesan rahasia, kuis, dan mengubah tampilan tema sesukamu. Ayo eksplor dan temukan kejutan interaktifnya!</p>
+    </div>
+    <div class="section-box">
+      <h3>🎁 Dapatkan Pesan Rahasia</h3>
+      <button class="btn" onclick="playClick(); toggleShow('secretMessage')">Klik Aku!</button>
+      <div class="hidden-box" id="secretMessage">
+        💌 Kamu bukan sekedar user. Kamu adalah sistem yang sedang di-boot untuk menaklukkan dunia digital.!
+      </div>
+    </div>
+    <div class="section-box">
+      <h3>🎮 Mini Quiz</h3>
+      <p>Siapa penemu JavaScript?</p>
+      <input id="quizInput" placeholder="Jawabanmu..." style="padding:10px;border-radius:5px;border:none;" />
+      <br>
+      <button class="btn" onclick="playClick(); checkQuiz()">Jawab</button>
+      <div class="hidden-box" id="quizResult"></div>
+    </div>
+    <div class="section-box">
+      <h3>🎨 Ubah Warna Tema</h3>
+      <button class="btn" onclick="playClick(); changeTheme('blue')">Biru</button>
+      <button class="btn" onclick="playClick(); changeTheme('purple')">Ungu</button>
+      <button class="btn" onclick="playClick(); changeTheme('dark')">Gelap</button>
+    </div>
+  </main>
+  <div class="footer">
+    &copy; 2025 Dibikin pake kopi, bug, dan akhirnya... jalan juga 💻☕
+
+  </div>
+  <div class="floating-icons">
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" onclick="showModal('info')" title="Info">
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" onclick="scrollToTop()" title="Kembali ke atas">
+  </div>
+  <div class="modal" id="infoModal">
+    <div class="modal-close" onclick="closeModal('info')">&times;</div>
+    <h3>ℹ Tentang Zona Ini</h3>
+    <p>Halaman ini dirancang untuk bereksperimen secara interaktif.</p>
+  </div>
+  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d3fc248b50.mp3?filename=click-124467.mp3"></audio>
+  <script>
+    function toggleShow(id) {
+      const el = document.getElementById(id);
+      el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+    function checkQuiz() {
+      const input = document.getElementById('quizInput').value.toLowerCase();
+      const output = document.getElementById('quizResult');
+      output.style.display = 'block';
+      if (input.includes('brendan eich')) {
+        output.innerText = '✅ Jawaban kamu benar! Brendan Eich adalah penciptanya.';
+      } else {
+        output.innerText = '❌ Oops, bukan itu. Coba lagi ya!';
+      }
+    }
+    function changeTheme(theme) {
+      let bg = '#2c5364';
+      if (theme === 'blue') bg = 'linear-gradient(135deg, #1e3c72, #2a5298)';
+      if (theme === 'purple') bg = 'linear-gradient(135deg, #6a11cb, #2575fc)';
+      if (theme === 'dark') bg = 'radial-gradient(circle, #0f2027, #203a43, #2c5364)';
+      document.body.style.background = bg;
+    }
+    function playClick() {
+      const sound = document.getElementById('clickSound');
+      sound.currentTime = 0;
+      sound.play();
+    }
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function showModal(type) {
+      if (type === 'info') {
+        document.getElementById('infoModal').classList.add('show');
+        playClick();
+      }
+    }
+    function closeModal(type) {
+      if (type === 'info') {
+        document.getElementById('infoModal').classList.remove('show');
+        playClick();
+      }
+    }
+  </script>
+</body>
+</html>
